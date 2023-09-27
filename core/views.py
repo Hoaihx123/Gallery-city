@@ -2,11 +2,13 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import auth
-from .models import User, Owner, Artist
+from .models import User, Owner, Artist, Gallery
 # Create your views here.
 @login_required(login_url='signin')
 def index(request):
-    return render(request, 'core/home.html')
+    galleries = Gallery.objects.all()
+    context = {'galleries': galleries}
+    return render(request, 'core/home.html', context)
 
 def signin(request):
     if request.method == 'POST':
@@ -16,9 +18,9 @@ def signin(request):
         if user is not None:
             auth.login(request, user)
             if user.is_owner:
-                return redirect('/')
+                return redirect('owner/')
             if user.is_artist:
-                return redirect('/')
+                return redirect('artist/')
             else:
                 return redirect('/')
         else:

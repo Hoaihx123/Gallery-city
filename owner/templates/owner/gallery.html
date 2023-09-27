@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gallery setting</title>
+</head>
+<body>
+    <form action="", method="POST">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="{{context.0}}"><br>
+        <br>
+        <input type="number" name="acreage" placeholder="{{context.1}}"><br>
+        <br>
+        <input type="text" name="address" placeholder="{{context.2}}"><br>
+        <br>
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>

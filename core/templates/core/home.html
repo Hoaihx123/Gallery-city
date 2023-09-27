@@ -8,5 +8,10 @@
     <a href="logout">Log out</a>
     <h4>This is home page</h4>
     <h4>Trang này sau này sẽ hiển thị vé</h4>
+    <b>galleries list:</b>
+    {% for gallery in galleries %}
+    <a href="#"><h1>{{gallery.name}}</h1></a>
+    {% endfor %}
+
 </body>
 </html>

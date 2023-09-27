@@ -4,11 +4,14 @@ from django.contrib import messages
 from django.contrib.auth.models import auth
 from .models import User, Owner, Artist, Gallery
 # Create your views here.
+
+
 @login_required(login_url='signin')
 def index(request):
     galleries = Gallery.objects.all()
     context = {'galleries': galleries}
     return render(request, 'core/home.html', context)
+
 
 def signin(request):
     if request.method == 'POST':
@@ -29,6 +32,7 @@ def signin(request):
     else:
         return render(request, 'core/signin.html')
 
+
 def signup(request):
     if request.method == "POST":
         username = request.POST['username']
@@ -42,23 +46,29 @@ def signup(request):
                 return redirect('signup')
             else:
                 if type == 'owner':
-                    user = User.objects.create_user(username=username, email=email, password=password)
+                    user = User.objects.create_user(
+                        username=username, email=email, password=password)
                     user.is_owner = True
                     user.save()
-                    user_login = auth.authenticate(username=username, password=password)
+                    user_login = auth.authenticate(
+                        username=username, password=password)
                     auth.login(request, user_login)
                     return redirect('owner/setting')
                 if type == 'artist':
-                    user = User.objects.create_user(username=username, email=email, password=password)
+                    user = User.objects.create_user(
+                        username=username, email=email, password=password)
                     user.is_artist = True
                     user.save()
-                    user_login = auth.authenticate(username=username, password=password)
+                    user_login = auth.authenticate(
+                        username=username, password=password)
                     auth.login(request, user_login)
                     return redirect('artist/setting')
                 else:
-                    user = User.objects.create_user(username=username, email=email, password=password)
+                    user = User.objects.create_user(
+                        username=username, email=email, password=password)
                     user.save()
-                    user_login = auth.authenticate(username=username, password=password)
+                    user_login = auth.authenticate(
+                        username=username, password=password)
                     auth.login(request, user_login)
                     return redirect('/')
         else:
@@ -66,6 +76,7 @@ def signup(request):
             return redirect('signup')
     else:
         return render(request, 'core/signup.html')
+
 
 @login_required(login_url='signin')
 def logout(request):

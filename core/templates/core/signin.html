@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<style>
+     h5{
+           color: red;
+        }
+      </style>
+      {% for mes in messages %}
+       <h5>{{mes}}</h5>
+      {% endfor %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="text" name="user" placeholder="Username">
+        <input type="text" name="pass" placeholder="Password">
+        <button type="submit">Signin</button>
+    </form>
+</body>
+</html>

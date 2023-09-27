@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+     <style>
+     h5{
+           color: red;
+        }
+      </style>
+      {% for mes in messages %}
+       <h5>{{mes}}</h5>
+      {% endfor %}
+    <form action="", method="POST">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username"><br>
+        <br>
+        <input type="text" name="email" placeholder="Email" ><br>
+        <br>
+        <input type="text" name="password" placeholder="Password"><br>
+        <br>
+        <input type="text" name="password2" placeholder="Confirm Password"><br>
+        <br>
+        <label for="type">You are:</label>
+        <select name="type" id="type">
+          <option value="owner">Owner</option>
+          <option value="artist">Artist</option>
+          <option value="customer">Customer</option>
+        </select><br>
+        <br>
+        <button type="submit">Signup</button>
+    </form>
+</body>
+</html>

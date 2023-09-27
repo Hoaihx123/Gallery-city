@@ -82,9 +82,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'Gallery_city',
         'USER': 'postgres',
-        'PASSWORD': '98765',
+        'PASSWORD': '123456',
         'HOST': 'localhost',
         'PORT': '5432',
+        # git changes
     }
 }
 

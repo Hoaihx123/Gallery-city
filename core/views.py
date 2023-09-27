@@ -6,7 +6,7 @@ from .models import User, Owner, Artist, Gallery
 # Create your views here.
 
 
-@login_required(login_url='signin')
+@login_required(login_url='core:signin')
 def index(request):
     galleries = Gallery.objects.all()
     context = {'galleries': galleries}
@@ -28,7 +28,7 @@ def signin(request):
                 return redirect('/')
         else:
             messages.info(request, "Username or password incorrect")
-            return redirect('signin')
+            return redirect('core:signin')
     else:
         return render(request, 'core/signin.html')
 
@@ -78,7 +78,7 @@ def signup(request):
         return render(request, 'core/signup.html')
 
 
-@login_required(login_url='signin')
+@login_required(login_url='core:signin')
 def logout(request):
     auth.logout(request)
     return redirect('/')

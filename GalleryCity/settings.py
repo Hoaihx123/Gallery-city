@@ -85,7 +85,7 @@ DATABASES = {
         'PASSWORD': '123456',
         'HOST': 'localhost',
         'PORT': '5432',
-        # git changes
+        # test github
     }
 }
 

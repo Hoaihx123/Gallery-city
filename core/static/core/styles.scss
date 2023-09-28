@@ -1,7 +1,7 @@
-$base-color1: #102C57;
+$base-color4: #102C57;
 $base-color2: #DAC0A3;
 $base-color3: #EADBC8;
-$base-color4: #F8F0E5;
+$base-color1: #F8F0E5;
 
 * {
     font-family: Arial, Helvetica, sans-serif;
@@ -15,15 +15,17 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: $base-color2;
+    background: url(https://images.liverpoolmuseums.org.uk/2020-05/JMPP-zoom.png) repeat;
     background-size: cover;
     background-position: center;
-
 }
 
 .wrapper {
     width: 420px;
-    background: $base-color1;
+    background: transparent;
+    border: 2px solid rgba(255,255,255,.2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0,0,0,.2);
     color: $base-color2;
     border-radius: 10px;
     padding: 30px 40px;
@@ -106,6 +108,10 @@ body {
         font-size: 16px;
         color: #333;
         font-weight: 600;
+
+        p {
+            color: #F8F0E5;
+        }
     }
 
     .register-link {

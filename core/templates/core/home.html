@@ -7,16 +7,30 @@
 </head>
 
 <body>
-    <a href="logout">Log out</a>
-    <h4>This is home page</h4>
-    <h4>Trang này sau này sẽ hiển thị vé</h4>
-    <b>galleries list:</b>
+    <div>
+        <h2><b>Welcome to Gallery city</b></h2>
+        <a href="logout" style="text-decoration: none">Log out</a>
+    </div>
+    <hr>
+    <h2>Galleries list</h2>
     {% for gallery in galleries %}
-    <a href="#">
+    <a style="text-decoration: none" href="#">
         <h1>{{gallery.name}}</h1>
     </a>
     {% endfor %}
-
+    <hr>
+    <h2>Comming soon...</h2>
+    {% for exhibit in exhibits %}
+    <div>
+    <a href="#" style="text-decoration: none">
+        <h1>{{exhibit.name}}</h1>
+        <h2>from {{exhibit.start_time}} at {{exhibit.gallery.name}} - address: {{exhibit.gallery.address}}</h2>
+        <b>Price: {{exhibit.price}} ----- {{exhibit.quantity_sold}}/{{exhibit.num_of_tickets}} tickets have been sold </b>
+    </a>
+    </div>
+    <br>
+    {% endfor %}
+    <hr>
 </body>
 
 </html>

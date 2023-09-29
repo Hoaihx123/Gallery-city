@@ -1,0 +1,23 @@
+{% extends 'owner/base.html' %}
+{% block content %}
+    <form action="", method="POST">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="name"><br>
+        <br>
+        <input type="date" name="start_time" placeholder="start_time">
+        <input type="date" name="end_time" placeholder="end_time"><br>
+        <br>
+        <label for="type">Type:</label>
+		<select name="type" id="type">
+			<option value="fine">Fine arts</option>
+			<option value="applied">Applied arts</option>
+			<option value="sculpture">Sculpture</option>
+		</select><br>
+        <br>
+        <input type="number" name="num_of_tickets" placeholder="num_of_tickets"><br>
+        <br>
+        <input type="number" name="price" placeholder="price">$<br>
+        <br>
+        <button type="submit">Create</button>
+    </form>
+{% endblock %}

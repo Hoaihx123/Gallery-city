@@ -6,5 +6,6 @@ admin.site.register(models.Owner)
 admin.site.register(models.Artist)
 admin.site.register(models.Gallery)
 admin.site.register(models.Work)
+admin.site.register(models.Exhibit)
 
 

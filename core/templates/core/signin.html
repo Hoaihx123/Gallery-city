@@ -11,15 +11,21 @@
 </head>
 
 <body>
-	{% for mes in messages %}
-	<h5>{{mes}}</h5>
-	{% endfor %}
 
 	<div class="wrapper">
 		<form action="{% url 'core:signin' %}" method="POST">
 			{% csrf_token %}
 			<h1>Sign In</h1>
-
+			{% if messages is not null %}
+			<style>
+                 h5{
+                      color: red;
+                    }
+            </style>
+			{% for mes in messages %}
+				<h5>{{mes}}</h5>
+			{% endfor %}
+			{% endif %}
 			<div class="input-box">
 				<input type="text" name="user" placeholder="Username" required>
 				<i class='bx bxs-user'></i>
@@ -34,7 +40,6 @@
 				<label for=""><input type="checkbox">Remember me</label>
 				<a href="{% url 'core:signin' %}">Forgot password?</a>
 			</div>
-
 			<button type="submit" class="btn">
 				<p>Sign In</p>
 			</button>

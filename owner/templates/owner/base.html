@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manager</title>
+</head>
+<body>
+    <div style="background-color: cadetblue;"><h4><b>GALLERY CITY<b/></h4>
+    <h3>{{glr.name}}</h3>
+    <a href="../">Home</a><br>
+    <a href="../logout">Logout</a>
+
+
+    </div>
+        <div>
+			<div style="width: 22%; height: 750;float: left;text-align: center;padding-top: 6;">
+				<ul style="text-align:left; font-size:25">
+                <a href="/owner"><h2>Management</h2></a><br>
+                <a href="/owner/create_exhibit"><h2>Create exhibit</h2></a><br>
+                <a href="/owner/request"><h2>Sequested information</h2></a><br>
+                <a href="/owner/gallery"><h2>Setting</h2></a><br>
+				</ul>
+		    </div>
+		    <div id="did1_2" style="width:78%;float:left;background: #afd3e8">
+                {% block content %}
+                {% endblock %}
+			</div>
+		</div>
+    </h4>
+</body>
+</html>

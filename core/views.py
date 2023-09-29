@@ -2,14 +2,15 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import auth
-from .models import User, Owner, Artist, Gallery
+from .models import User, Owner, Artist, Gallery, Exhibit
 # Create your views here.
 
 
 @login_required(login_url='core:signin')
 def index(request):
     galleries = Gallery.objects.all()
-    context = {'galleries': galleries}
+    exhibits = Exhibit.objects.raw("SELECT * from core_exhibit where start_time>to_char(now(), 'YYYY-MM-DD') order by start_time")
+    context = {'galleries': galleries, 'exhibits': exhibits}
     return render(request, 'core/home.html', context)
 
 

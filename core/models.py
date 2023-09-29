@@ -6,6 +6,7 @@ from django.contrib.auth.models import AbstractUser
 
 
 execution_choice = (('paint', 'paint'), ('watercolor', 'watercolor'), ('sculpture', 'sculpture'))
+exhibit_choice =(('fine', 'fine' ), ('applied', 'applied'), ('sculpture', 'sculpture'))
 
 class User(AbstractUser):
     is_owner = models.BooleanField(default=False)
@@ -33,6 +34,18 @@ class Gallery(models.Model):
     name = models.CharField(max_length=128)
     acreage = models.IntegerField()
     address = models.TextField(max_length=128)
+    def __str__(self):
+        return self.name
+
+class Exhibit(models.Model):
+    gallery = models.ForeignKey(Gallery, on_delete=models.CASCADE)
+    name = models.CharField(max_length=64)
+    start_time = models.TextField(max_length=10)
+    end_time = models.TextField(max_length=10)
+    type = models.CharField(choices=execution_choice)
+    num_of_tickets = models.IntegerField()
+    quantity_sold = models.IntegerField(default=0)
+    price = models.IntegerField()
     def __str__(self):
         return self.name
 

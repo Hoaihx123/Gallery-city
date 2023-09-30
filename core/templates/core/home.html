@@ -9,6 +9,7 @@
 <body>
     <div>
         <h2><b>Welcome to Gallery city</b></h2>
+        <h1>{{username}}</h1>
         <a href="logout" style="text-decoration: none">Log out</a>
     </div>
     <hr>
@@ -16,6 +17,7 @@
     {% for gallery in galleries %}
     <a style="text-decoration: none" href="#">
         <h1>{{gallery.name}}</h1>
+        <img src="/media/{{gallery.img}}" width="800" height="400">
     </a>
     {% endfor %}
     <hr>
@@ -24,8 +26,9 @@
     <div>
     <a href="#" style="text-decoration: none">
         <h1>{{exhibit.name}}</h1>
+        <img src="/media/{{exhibit.img}}" width="300" height="200">
         <h2>from {{exhibit.start_time}} at {{exhibit.gallery.name}} - address: {{exhibit.gallery.address}}</h2>
-        <b>Price: {{exhibit.price}} ----- {{exhibit.quantity_sold}}/{{exhibit.num_of_tickets}} tickets have been sold </b>
+        <b>Price: {{exhibit.price}}$ </b>
     </a>
     </div>
     <br>

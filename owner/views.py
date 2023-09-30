@@ -21,12 +21,12 @@ def manage(request):
             else:
                 glr = Gallery.objects.get(owner=owner)
                 exhibits = Exhibit.objects.filter(gallery=glr)
-                context = {'glr': glr, 'exhibits': exhibits}
+                context = {'glr': glr, 'exhibits': exhibits, 'owner_img': owner.img}
                 return render(request, 'owner/manage.html', context)
         except Gallery.DoesNotExist:
-            return redirect('owner/gallery')
+            return redirect('../owner/gallery')
     except Owner.DoesNotExist:
-        return redirect('owner/setting')
+        return redirect('../owner/setting')
 
 @user_passes_test(lambda u: u.is_owner == True)
 def create_exhibit(request):
@@ -41,11 +41,12 @@ def create_exhibit(request):
                 type = request.POST['type']
                 num_of_tickets = request.POST['num_of_tickets']
                 price = request.POST['price']
-                new_exhibit = Exhibit.objects.create(gallery=glr, name=name, start_time=start_time, end_time=end_time, type=type, num_of_tickets=num_of_tickets, price=price)
+                img = request.FILES.get('img')
+                new_exhibit = Exhibit.objects.create(gallery=glr, name=name, start_time=start_time, end_time=end_time, type=type, num_of_tickets=num_of_tickets, price=price, img=img)
                 new_exhibit.save()
                 return redirect('../owner')
             else:
-                return render(request, 'owner/create_exhibit.html')
+                return render(request, 'owner/create_exhibit.html', {'glr': glr, 'owner_img': owner.img})
         except Gallery.DoesNotExist:
             return redirect('owner/gallery')
     except Owner.DoesNotExist:
@@ -94,7 +95,8 @@ def gallery(request):
                 glr.save()
                 return redirect('/owner')
             except Gallery.DoesNotExist:
-                glr = Gallery.objects.create(owner=owner, name=name, acreage=acreage, address=address)
+                img = request.FILES.get('img')
+                glr = Gallery.objects.create(owner=owner, name=name, acreage=acreage, address=address, img=img)
                 glr.save()
                 return redirect('/owner')
         else:

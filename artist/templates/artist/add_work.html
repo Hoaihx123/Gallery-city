@@ -1,0 +1,23 @@
+{% extends 'artist/base.html' %}
+{% block content %}
+    <form action="", method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <br>
+        <input type="text" name="name" placeholder="name"><br>
+        <br>
+        <label for="type">Execution:</label>
+		<select name="type" id="type">
+			<option value="paint">Paint</option>
+			<option value="watercolor">Watercolor</option>
+			<option value="sculpture">Sculpture</option>
+		</select><br>
+        <input type="number" name="height" placeholder="height"><br>
+        <br>
+        <input type="number" name="width" placeholder="width"><br>
+        <br>
+        <input type="number" name="volume" placeholder="volume"><br>
+        <br>
+        <input type="file" name="img"><br><br>
+        <button type="submit">Save</button>
+    </form>
+{% endblock %}

@@ -5,7 +5,7 @@
     <title>Gallery setting</title>
 </head>
 <body>
-    <form action="", method="POST">
+    <form action="", method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <input type="text" name="name" placeholder="{{context.0}}"><br>
         <br>
@@ -13,6 +13,7 @@
         <br>
         <input type="text" name="address" placeholder="{{context.2}}"><br>
         <br>
+        <input type="file" name="img"><br><br>
         <button type="submit">Save</button>
     </form>
 </body>

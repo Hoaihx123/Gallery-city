@@ -1,6 +1,6 @@
 {% extends 'owner/base.html' %}
 {% block content %}
-    <form action="", method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <input type="text" name="name" placeholder="name"><br>
         <br>
@@ -13,6 +13,9 @@
 			<option value="applied">Applied arts</option>
 			<option value="sculpture">Sculpture</option>
 		</select><br>
+        <br>
+        <label>Choose image</label>
+        <input type="file" name="img"><br>N
         <br>
         <input type="number" name="num_of_tickets" placeholder="num_of_tickets"><br>
         <br>

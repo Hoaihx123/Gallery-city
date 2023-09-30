@@ -18,6 +18,7 @@ class Owner(models.Model):
     name = models.CharField(max_length=64)
     address = models.TextField(max_length=128)
     numphone = models.CharField(max_length=15)
+    img = models.ImageField(upload_to='owners', default='img.png', blank=True)
     def __str__(self):
         return self.name
 class Artist(models.Model):
@@ -27,6 +28,7 @@ class Artist(models.Model):
     birthday = models.TextField(max_length=10)
     bio = models.TextField(max_length=128, blank=True)
     education = models.TextField(max_length=128)
+    img = models.ImageField(upload_to='artists', default='img.png', blank=True)
     def __str__(self):
         return self.name
 class Gallery(models.Model):
@@ -34,6 +36,7 @@ class Gallery(models.Model):
     name = models.CharField(max_length=128)
     acreage = models.IntegerField()
     address = models.TextField(max_length=128)
+    img = models.ImageField(upload_to='galleries', blank=True)
     def __str__(self):
         return self.name
 
@@ -46,6 +49,7 @@ class Exhibit(models.Model):
     num_of_tickets = models.IntegerField()
     quantity_sold = models.IntegerField(default=0)
     price = models.IntegerField()
+    img = models.ImageField(upload_to='exhibits', blank=True)
     def __str__(self):
         return self.name
 
@@ -57,5 +61,6 @@ class Work(models.Model):
     height = models.IntegerField()
     width = models.IntegerField()
     volume = models.IntegerField(blank=True)
+    img = models.ImageField(upload_to='works', blank=True)
     def __str__(self):
         return self.name

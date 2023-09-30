@@ -1,7 +1,7 @@
-$base-color4: #102C57;
-$base-color2: #DAC0A3;
-$base-color3: #EADBC8;
-$base-color1: #F8F0E5;
+$base-color4: #102c57;
+$base-color2: #dac0a3;
+$base-color3: #eadbc8;
+$base-color1: #f8f0e5;
 
 * {
     font-family: Arial, Helvetica, sans-serif;
@@ -15,7 +15,8 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url(https://images.liverpoolmuseums.org.uk/2020-05/JMPP-zoom.png) repeat;
+    background: url(https://images.liverpoolmuseums.org.uk/2020-05/JMPP-zoom.png)
+        repeat;
     background-size: cover;
     background-position: center;
 }
@@ -23,9 +24,9 @@ body {
 .wrapper {
     width: 420px;
     background: transparent;
-    border: 2px solid rgba(255,255,255,.2);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(20px);
-    box-shadow: 0 0 10px rgba(0,0,0,.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     color: $base-color2;
     border-radius: 10px;
     padding: 30px 40px;
@@ -48,7 +49,7 @@ body {
             background: transparent;
             border: none;
             outline: none;
-            border: 2px solid rgba(255,255,255,.2);
+            border: 2px solid rgba(255, 255, 255, 0.2);
             border-radius: 40px;
             font-size: 16px;
             color: $base-color4;
@@ -88,7 +89,6 @@ body {
         a {
             color: $base-color4;
             text-decoration: none;
-
         }
 
         a:hover {
@@ -103,14 +103,14 @@ body {
         border: none;
         outline: none;
         border-radius: 40px;
-        box-shadow: 0 0 10px rgba(0,0,0,.1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         cursor: pointer;
         font-size: 16px;
         color: #333;
         font-weight: 600;
 
         p {
-            color: #F8F0E5;
+            color: #f8f0e5;
         }
     }
 

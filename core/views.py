@@ -9,7 +9,8 @@ from .models import User, Owner, Artist, Gallery, Exhibit
 @login_required(login_url='core:signin')
 def index(request):
     galleries = Gallery.objects.all()
-    exhibits = Exhibit.objects.raw("SELECT * from core_exhibit where start_time>to_char(now(), 'YYYY-MM-DD') order by start_time")
+    exhibits = Exhibit.objects.raw(
+        "SELECT * from core_exhibit where start_time>to_char(now(), 'YYYY-MM-DD') order by start_time")
     context = {'galleries': galleries, 'exhibits': exhibits}
     return render(request, 'core/home.html', context)
 
@@ -44,7 +45,7 @@ def signup(request):
         if password == password2:
             if User.objects.filter(username=username).exists() or User.objects.filter(email=email).exists():
                 messages.info(request, "Email or user was used")
-                return redirect('signup')
+                return redirect('core:signup')
             else:
                 if type == 'owner':
                     user = User.objects.create_user(
@@ -74,7 +75,7 @@ def signup(request):
                     return redirect('/')
         else:
             messages.info(request, "Password no matching")
-            return redirect('signup')
+            return redirect('core:signup')
     else:
         return render(request, 'core/signup.html')
 

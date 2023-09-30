@@ -1,39 +1,63 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 	<meta charset="UTF-8">
 	<title>Title</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<style>
 		h5 {
 			color: red;
 		}
 	</style>
+	<link rel="stylesheet" href="{% static 'core/styles/styles.css' %}">
 </head>
 
 <body>
-	{% for mes in messages %}
-	<h5>{{mes}}</h5>
-	{% endfor %}
-	<form action="" , method="POST">
-		{% csrf_token %}
-		<input type="text" name="username" placeholder="Username"><br>
-		<br>
-		<input type="text" name="email" placeholder="Email"><br>
-		<br>
-		<input type="text" name="password" placeholder="Password"><br>
-		<br>
-		<input type="text" name="password2" placeholder="Confirm Password"><br>
-		<br>
-		<label for="type">You are:</label>
-		<select name="type" id="type">
-			<option value="owner">Owner</option>
-			<option value="artist">Artist</option>
-			<option value="customer">Customer</option>
-		</select><br>
-		<br>
-		<button type="submit">Signup</button>
-	</form>
+
+	<div class="wrapper">
+		<form action="" , method="POST">
+			{% for mes in messages %}
+			<h5>{{mes}}</h5>
+			{% endfor %}
+			{% csrf_token %}
+
+			<h1>Sign Up</h1>
+
+			<div class="input-box">
+				<input type="text" name="username" placeholder="Username">
+			</div>
+
+			<div class="input-box">
+				<input type="text" name="email" placeholder="Email">
+			</div>
+
+			<div class="input-box">
+				<input type="password" name="password" placeholder="Password">
+			</div>
+
+			<div class="input-box">
+				<input type="text" name="password2" placeholder="Confirm Password">
+			</div>
+
+			<div class="input-box">
+				<label style="color:#102c57;margin-left:10px" for="type">You are: </label>
+				<select name="type" id="select-box"
+					style="background-color: #102c57;color:#f8f0e5;font-size:14px;padding:5px;border-radius:8px;">
+					<option value="customer">Customer</option>
+					<option value="artist">Artist</option>
+					<option value="owner">Owner</option>
+				</select>
+			</div>
+
+			<button type="submit" class="btn">
+				<p>Sign Up</p>
+			</button>
+
+		</form>
+	</div>
+
 </body>
 
 </html>

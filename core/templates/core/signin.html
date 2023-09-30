@@ -8,6 +8,11 @@
 	<title>Sign In</title>
 	<link rel="stylesheet" href="{% static 'core/styles/styles.css' %}">
 	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	<style>
+		h5 {
+			color: red;
+		}
+	</style>
 </head>
 
 <body>
@@ -17,13 +22,8 @@
 			{% csrf_token %}
 			<h1>Sign In</h1>
 			{% if messages is not null %}
-			<style>
-                 h5{
-                      color: red;
-                    }
-            </style>
 			{% for mes in messages %}
-				<h5>{{mes}}</h5>
+			<h5>{{mes}}</h5>
 			{% endfor %}
 			{% endif %}
 			<div class="input-box">

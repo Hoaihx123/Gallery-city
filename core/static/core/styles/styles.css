@@ -22,12 +22,12 @@ body {
   -webkit-backdrop-filter: blur(20px);
           backdrop-filter: blur(20px);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  color: #DAC0A3;
+  color: #dac0a3;
   border-radius: 10px;
   padding: 30px 40px;
 }
 .wrapper h1 {
-  color: #102C57;
+  color: #102c57;
   font-size: 36px;
   text-align: center;
 }
@@ -46,17 +46,17 @@ body {
   border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 40px;
   font-size: 16px;
-  color: #102C57;
+  color: #102c57;
   padding: 20px 25px 20px 20px;
 }
 .wrapper .input-box input::-moz-placeholder {
-  color: #102C57;
+  color: #102c57;
 }
 .wrapper .input-box input::placeholder {
-  color: #102C57;
+  color: #102c57;
 }
 .wrapper .input-box i {
-  color: #102C57;
+  color: #102c57;
   position: absolute;
   right: 20px;
   top: 50%;
@@ -70,15 +70,15 @@ body {
   margin: -15px 0 15px;
 }
 .wrapper .remember-forgot label {
-  color: #102C57;
+  color: #102c57;
 }
 .wrapper .remember-forgot label input {
-  color: #102C57;
-  accent-color: #102C57;
+  color: #102c57;
+  accent-color: #102c57;
   margin-right: 3px;
 }
 .wrapper .remember-forgot a {
-  color: #102C57;
+  color: #102c57;
   text-decoration: none;
 }
 .wrapper .remember-forgot a:hover {
@@ -87,7 +87,7 @@ body {
 .wrapper .btn {
   width: 100%;
   height: 45px;
-  background: #102C57;
+  background: #102c57;
   border: none;
   outline: none;
   border-radius: 40px;
@@ -98,7 +98,7 @@ body {
   font-weight: 600;
 }
 .wrapper .btn p {
-  color: #F8F0E5;
+  color: #f8f0e5;
 }
 .wrapper .register-link {
   font-size: 14.5px;
@@ -106,10 +106,10 @@ body {
   margin: 20px 0 15px;
 }
 .wrapper .register-link p {
-  color: #102C57;
+  color: #102c57;
 }
 .wrapper .register-link p a {
-  color: #102C57;
+  color: #102c57;
   text-decoration: none;
   font-weight: 600;
 }

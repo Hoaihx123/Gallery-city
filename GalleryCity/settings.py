@@ -80,9 +80,9 @@ WSGI_APPLICATION = 'GalleryCity.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'Gallery_city',
+        'NAME': 'gallery_city',
         'USER': 'postgres',
-        'PASSWORD': '123456',
+        'PASSWORD': 'Icandoit2706',
         'HOST': 'localhost',
         'PORT': '5432',
         # test github

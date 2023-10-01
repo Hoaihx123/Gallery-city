@@ -1,0 +1,16 @@
+{% extends 'artist/base.html' %}
+{% block content %}
+    {% for work in works %}
+        <h3>Name: {{work.name}}</h3>
+        <h3>Execution: {{work.execution}}</h3>
+        <h3>Date created: {{work.data}}</h3>
+        <h3>Size: {{work.height}}cmx{{work.width}}cm</h3>
+        <h3>Volume: {{work.volume}}</h3>
+        <form action="", method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="work_id" value="{{work.id}}">
+            <button type="submit">Delete</button>
+        </form>
+        <hr>
+    {% endfor %}
+{% endblock %}

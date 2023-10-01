@@ -8,14 +8,20 @@
 
 <body>
     <div>
-        <h2><b>Welcome to Gallery city</b></h2>
-        <h1>{{username}}</h1>
+        <h2><b>Welcome <a href="#" style="text-decoration: none">@{{username}}</a> to Gallery city</b></h2>
+        {% if request.user.is_owner %}
+        <h2><a href="owner" style="text-decoration: none">Manager</a></h2>
+        {% endif %}
+        {% if request.user.is_artist %}
+        <h2><a href="artist" style="text-decoration: none">Manager</a></h2>
+        {% endif %}
+
         <a href="logout" style="text-decoration: none">Log out</a>
     </div>
     <hr>
     <h2>Galleries list</h2>
     {% for gallery in galleries %}
-    <a style="text-decoration: none" href="#">
+    <a style="text-decoration: none" href="gallery/{{gallery.owner_id}}">
         <h1>{{gallery.name}}</h1>
         <img src="/media/{{gallery.img}}" width="800" height="400">
     </a>
@@ -24,11 +30,11 @@
     <h2>Comming soon...</h2>
     {% for exhibit in exhibits %}
     <div>
-        <a href="#" style="text-decoration: none">
+        <a href="exhibit/{{exhibit.id}}" style="text-decoration: none">
             <h1>{{exhibit.name}}</h1>
             <img src="/media/{{exhibit.img}}" width="300" height="200">
             <h2>from {{exhibit.start_time}} at {{exhibit.gallery.name}} - address: {{exhibit.gallery.address}}</h2>
-            <b>Price: {{exhibit.price}}$ </b>
+            <b>Price: {{exhibit.price}}$ </b> <a href="buy_ticket?exhibit_id={{exhibit.id}}">Buy now</a>
         </a>
     </div>
     <br>

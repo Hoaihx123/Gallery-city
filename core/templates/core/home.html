@@ -24,12 +24,12 @@
     <h2>Comming soon...</h2>
     {% for exhibit in exhibits %}
     <div>
-    <a href="#" style="text-decoration: none">
-        <h1>{{exhibit.name}}</h1>
-        <img src="/media/{{exhibit.img}}" width="300" height="200">
-        <h2>from {{exhibit.start_time}} at {{exhibit.gallery.name}} - address: {{exhibit.gallery.address}}</h2>
-        <b>Price: {{exhibit.price}}$ </b>
-    </a>
+        <a href="#" style="text-decoration: none">
+            <h1>{{exhibit.name}}</h1>
+            <img src="/media/{{exhibit.img}}" width="300" height="200">
+            <h2>from {{exhibit.start_time}} at {{exhibit.gallery.name}} - address: {{exhibit.gallery.address}}</h2>
+            <b>Price: {{exhibit.price}}$ </b>
+        </a>
     </div>
     <br>
     {% endfor %}

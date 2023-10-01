@@ -4,7 +4,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Title</title>
+	<title>Sign Up</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<style>
 		h5 {
@@ -18,6 +18,8 @@
 
 	<div class="wrapper">
 		<form action="" , method="POST">
+			{% csrf_token %}
+
 			{% for mes in messages %}
 			<h5>{{mes}}</h5>
 			{% endfor %}
@@ -26,25 +28,27 @@
 			<h1>Sign Up</h1>
 
 			<div class="input-box">
-				<input type="text" name="username" placeholder="Username">
+				<input type="text" name="username" placeholder="Username" required>
 			</div>
 
 			<div class="input-box">
-				<input type="text" name="email" placeholder="Email">
+				<input type="text" name="email" placeholder="Email" required>
 			</div>
 
 			<div class="input-box">
-				<input type="password" name="password" placeholder="Password">
+				<input type="password" name="password" placeholder="Password" required>
 			</div>
 
 			<div class="input-box">
-				<input type="text" name="password2" placeholder="Confirm Password">
+				<input type="password" name="password2" placeholder="Confirm Password" required>
 			</div>
 
 			<div class="input-box">
 				<label style="color:#102c57;margin-left:10px" for="type">You are: </label>
 				<select name="type" id="select-box"
-					style="background-color: #102c57;color:#f8f0e5;font-size:14px;padding:5px;border-radius:8px;">
+					style="background-color: #102c57;color:#f8f0e5;font-size:14px;padding:5px;border-radius:8px;"
+					required>
+					<option value="" selected disabled hidden>Choose account type</option>
 					<option value="customer">Customer</option>
 					<option value="artist">Artist</option>
 					<option value="owner">Owner</option>

@@ -1,45 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "core/layout.html" %}
+{% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-</head>
+{% block title %}
+Home
+{% endblock %}
 
-<body>
-    <div>
-        <h2><b>Welcome <a href="#" style="text-decoration: none">@{{username}}</a> to Gallery city</b></h2>
-        {% if request.user.is_owner %}
-        <h2><a href="owner" style="text-decoration: none">Manager</a></h2>
-        {% endif %}
-        {% if request.user.is_artist %}
-        <h2><a href="artist" style="text-decoration: none">Manager</a></h2>
-        {% endif %}
+{% block more_css %}
+<link rel="stylesheet" href="{% static 'core/styles/home.css' %}">
+{% endblock %}
 
-        <a href="logout" style="text-decoration: none">Log out</a>
-    </div>
-    <hr>
-    <h2>Galleries list</h2>
+{% block username %}
+@{{username}}
+{% endblock %}
+
+{% comment %} replace this profile-picture-link by Django variable {% endcomment %}
+{% block profile_picture %}
+https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzCb4DonWw5pT1-A3Su9HzG6TTN4nMOmj7tg&usqp=CAU
+{% endblock %}
+
+{% block my_galleries %}
+{% if request.user.is_owner %}
+<a href="owner">
+    <button class="my-galleries-btn">
+        <i class='bx bxs-bank'></i>
+        My Galleries
+    </button>
+</a>
+{% endif %}
+{% endblock %}
+
+{% block my_arts %}
+{% if request.user.is_artist %}
+<a href="artist">
+    <button class="my-arts-btn">
+        <i class='bx bxs-palette'></i>
+        My Works
+    </button>
+</a>
+{% endif %}
+{% endblock %}
+
+{% block body %}
+{% comment %} TODO: Add display: grid to gallery-preview-container and add infomation {% endcomment %}
+<div class="gallery-preview-container">
     {% for gallery in galleries %}
     <a style="text-decoration: none" href="gallery/{{gallery.owner_id}}">
-        <h1>{{gallery.name}}</h1>
-        <img src="/media/{{gallery.img}}" width="800" height="400">
+        <div class="gallery-preview">
+            <div class="gallery-picture-container">
+                <img src="/media/{{gallery.img}}"
+                    alt="Picture of the gallery '{{gallery.name}}' owned by {{gallery.owner}}">
+            </div>
+
+            <div class="gallery-information-container">
+                <div class="gallery-name">{{gallery.name}}</div>
+                <div class="gallery-owner">
+                    <strong>Owner:</strong> {{gallery.owner}}
+                </div>
+                <div class="gallery-address">
+                    <strong>Address:</strong> {{gallery.address}}
+                </div>
+                <div class="gallery-acreage">
+                    <strong>Acreage:</strong> {{gallery.acreage}}m<sup>2</sup>
+                </div>
+                <div class="gallery-description">
+                    <strong>Description:</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia dolor
+                    neque sequi nulla id nemo minus odit, ipsa dicta delectus libero architecto obcaecati a, optio
+                    incidunt velit aut temporibus porro?
+                </div>
+            </div>
+        </div>
     </a>
     {% endfor %}
-    <hr>
-    <h2>Comming soon...</h2>
-    {% for exhibit in exhibits %}
-    <div>
-        <a href="exhibit/{{exhibit.id}}" style="text-decoration: none">
-            <h1>{{exhibit.name}}</h1>
-            <img src="/media/{{exhibit.img}}" width="300" height="200">
-            <h2>from {{exhibit.start_time}} at {{exhibit.gallery.name}} - address: {{exhibit.gallery.address}}</h2>
-            <b>Price: {{exhibit.price}}$ </b> <a href="buy_ticket?exhibit_id={{exhibit.id}}">Buy now</a>
-        </a>
-    </div>
-    <br>
-    {% endfor %}
-    <hr>
-</body>
+</div>
 
-</html>
+{% comment %} {% for exhibit in exhibits %}
+<div>
+    <a href="exhibit/{{exhibit.id}}" style="text-decoration: none">
+        <h1>{{exhibit.name}}</h1>
+        <img src="/media/{{exhibit.img}}" width="300" height="200">
+        <h2>from {{exhibit.start_time}} at {{exhibit.gallery.name}} - address: {{exhibit.gallery.address}}</h2>
+        <b>Price: {{exhibit.price}}$ </b> <a href="buy_ticket?exhibit_id={{exhibit.id}}">Buy now</a>
+    </a>
+</div>
+{% endfor %} {% endcomment %}
+{% endblock %}

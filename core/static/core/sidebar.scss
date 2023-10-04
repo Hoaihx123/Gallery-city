@@ -1,0 +1,40 @@
+$base-color1: #102c57;
+$base-color2: #dac0a3;
+$base-color3: #eadbc8;
+$base-color4: #f8f0e5;
+
+.sidebar {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 70px;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    border-right: 2px solid rgb(237, 237, 237);
+    background-color: $base-color4;
+    a {
+        text-decoration: none;
+        width: 100%;
+    }
+    button {
+        border: none !important;
+        width: 100%;
+        background-color: $base-color4;
+        height: 70px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #102c57;
+        font-size: 12px;
+        i {
+            font-size: 40px;
+            color: #102c57;
+        }
+    }
+    button:hover {
+        background-color: rgb(240, 240, 240);
+    }
+}

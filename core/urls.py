@@ -10,5 +10,6 @@ urlpatterns = [
     path('exhibit/<str:exhibit_id>', views.exhibit_view, name='exhibit_view'),
     path('gallery/<str:owner_id>', views.gallery_view, name='gallery_view'),
     path('buy_ticket', views.buy_ticket, name='buy_ticket'),
+    path('test_layout', views.test_layout, name='test_layout')
 
 ]

@@ -1,0 +1,118 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Title{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'core/styles/layout.css' %}">
+    <link rel="stylesheet" href="{% static 'core/styles/header.css' %}">
+    <link rel="stylesheet" href="{% static 'core/styles/sidebar.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    {% block more_css %}{% endblock %}
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo-container">
+            <a href="{% url "core:index" %}">
+                <p style="font-family: 'Bebas Neue', sans-serif;
+                font-family: 'Roboto', sans-serif;">GALLERY CITY</p>
+            </a>
+
+        </div>
+
+        <div class="search-container">
+            <form id="search-form" action="" method="GET">
+                <input type="text" name=""
+                    placeholder="Welcome {% block username %}@username{% endblock %}! Search anything here!">
+            </form>
+
+            <button class="submit-btn" type="submit" form="search-form" value="Submit">
+                <img class="search-icon" src="https://supersimple.dev/public/img/exercises/youtube/icons/search.svg"
+                    alt="look-up-icon">
+            </button>
+
+            <button class="voice-search-btn">
+                <img class="voice-search-icon"
+                    src="https://supersimple.dev/public/img/exercises/youtube/icons/voice-search-icon.svg"
+                    alt="speaker-icon">
+            </button>
+
+        </div>
+
+        <div class="utility-container">
+            {% block utilities %}{% endblock %}
+
+            <button class="notifications-btn">
+                <img src="https://supersimple.dev/public/img/exercises/youtube/icons/notifications.svg"
+                    alt="notifications">
+                <div class="number-notification">
+                    {% block number_notification %}14{% endblock %}
+                </div>
+            </button>
+
+
+            <button class="channel-picture-btn">
+
+                <img class="channel-picture"
+                    src="{% block profile_picture %}https://static.chotot.com/storage/chotot-kinhnghiem/c2c/2019/10/nhim-kieng-an-gi-1.jpg{% endblock %}"
+                    alt="channel-picture">
+                <ul>
+                    <li><a href="">Account</a></li>
+                    <li><a href="">History</a></li>
+                    <li><a href="{% url "core:signin" %}">Log out</a></li>
+                </ul>
+            </button>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <a href="{% url 'core:index' %}">
+            <button class="home-btn">
+                <i class='bx bxs-home-smile'></i>
+                Home
+            </button>
+        </a>
+
+        <a href="">
+            <button class="cart-btn">
+                <i class='bx bxs-cart'></i>
+                Cart
+            </button>
+        </a>
+
+
+        {% block my_galleries %}
+        {% endblock %}
+
+        {% block my_arts %}
+        {% endblock %}
+
+        <a href="{% url 'core:signin' %}">
+            <button class="log-out-btn">
+                <i class='bx bxs-log-out'></i>
+                Log Out
+            </button>
+        </a>
+
+    </div>
+
+    {% block body %}
+    <div class="content-foo">
+        content-foo
+    </div>
+    {% endblock %}
+
+</body>
+
+</html>

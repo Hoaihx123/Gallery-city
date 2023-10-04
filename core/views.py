@@ -6,6 +6,10 @@ from .models import User, Owner, Artist, Gallery, Exhibit
 # Create your views here.
 
 
+def test_layout(request):
+    return render(request, "core/layout.html")
+
+
 @login_required(login_url='core:signin')
 def index(request):
     galleries = Gallery.objects.all()
@@ -87,23 +91,27 @@ def logout(request):
     auth.logout(request)
     return redirect('/')
 
+
 @login_required(login_url='core:signin')
 def exhibit_view(request, exhibit_id):
     exhibit = Exhibit.objects.get(id=exhibit_id)
     context = {'exhibit': exhibit}
     return render(request, 'core/exhibit_view.html', context)
 
+
 @login_required(login_url='core:signin')
 def gallery_view(request, owner_id):
     gallery = Gallery.objects.get(owner_id=owner_id)
-    exhibits = Exhibit.objects.raw(f"SELECT * from core_exhibit where gallery_id={owner_id} and start_time>to_char(now(), 'YYYY-MM-DD') order by start_time")
+    exhibits = Exhibit.objects.raw(
+        f"SELECT * from core_exhibit where gallery_id={owner_id} and start_time>to_char(now(), 'YYYY-MM-DD') order by start_time")
     context = {'gallery': gallery, 'exhibits': exhibits}
     return render(request, 'core/gallery_view.html', context)
+
 
 @login_required(login_url='core:signin')
 def buy_ticket(request):
     exhibit_id = request.GET.get('exhibit_id')
     exhibit = Exhibit.objects.get(id=exhibit_id)
-    exhibit.quantity_sold +=1
+    exhibit.quantity_sold += 1
     exhibit.save()
     return HttpResponse('Buy successfully <a></a>')

@@ -16,6 +16,7 @@
   flex-direction: row;
   border-radius: 15px;
   border: 3px solid #102c57;
+  overflow: hidden;
 }
 .gallery-preview-container .gallery-preview .gallery-picture-container {
   flex: 2;
@@ -50,6 +51,6 @@
 .gallery-preview-container .gallery-preview .gallery-information-container .gallery-description {
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
 }/*# sourceMappingURL=home.css.map */

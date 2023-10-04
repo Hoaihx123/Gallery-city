@@ -1,2 +1,2 @@
 # Gallery_city
-![image](https://github.com/Hoaihx123/Gallery_city/assets/99666261/e759c8e9-5b29-486c-bde0-bf38f53ba514)
+![image](https://github.com/Hoaihx123/Gallery_city/assets/99666261/246e5fc0-426a-472e-893c-de25e3ff380e)

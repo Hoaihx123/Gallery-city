@@ -25,7 +25,8 @@ class Owner(models.Model):
     name = models.CharField(max_length=64)
     address = models.TextField(max_length=128)
     numphone = models.CharField(max_length=15)
-    img = models.ImageField(upload_to='owners', default='img.jpg', blank=True)
+    img = models.ImageField(
+        upload_to='owners', default='default/default.png', blank=True)
 
     def __str__(self):
         return self.name
@@ -39,7 +40,8 @@ class Artist(models.Model):
     birthday = models.TextField(max_length=10)
     bio = models.TextField(max_length=128, blank=True)
     education = models.TextField(max_length=128)
-    img = models.ImageField(upload_to='artists', default='img.png', blank=True)
+    img = models.ImageField(
+        upload_to='artists', default='default/default.png', blank=True)
 
     def __str__(self):
         return self.name

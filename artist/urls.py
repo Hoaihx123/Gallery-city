@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 
+app_name = "artist"  # This is better practice!
 urlpatterns = [
     path('', views.manage, name='manage'),
     path('setting', views.setting, name='setting'),

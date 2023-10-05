@@ -1,33 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{gallery.name}}</title>
-</head>
-<body>
-    <h2>This is page for view {{gallery.name}}</h2>
-    <a href="/" style="text-decoration: none"><h2>Home</h2></a>
-    <img src="{{gallery.owner.img.url}}" height="100" width="100">
-    <h2>Owner: {{gallery.owner.name}} - Number phone: {{gallery.owner.numphone}}</h2>
-    <hr>
-    <h2>Address: {{gallery.address}}</h2>
-    <h2>Acreage: {{gallery.acreage}}m<sup>2</sup></h2>
-    {% if gallery.img %}
-        <img src="{{gallery.img.url}}">
-    {% endif %}
-    <hr>
-    <h1>Events are comming</h1>
-    {% for exhibit in exhibits%}
-         <div>
-            <a href="../exhibit/{{exhibit.id}}" style="text-decoration: none">
-                <h2>{{exhibit.name}}<h2>
+{% extends "core/layout.html" %}
+{% load static %}
+
+{% block title %}
+{{gallery.name}}
+{% endblock %}
+
+{% block more_css %}
+{% endblock %}
+
+{% block username %}
+@{{gallery.owner}}
+{% endblock %}
+
+{% block number_notification %}
+5
+{% endblock %}
+
+{% comment %} {% block profile_picture %}
+{{owner.img}}
+{% endblock %} {% endcomment %}
+
+{% block body %}
+<h1>This is test server</h1>
+<h2>This is page for view {{gallery.name}}</h2>
+<a href="/" style="text-decoration: none">
+    <h2>Home</h2>
+</a>
+<img src="{{gallery.owner.img.url}}" height="100" width="100">
+<h2>Owner: {{gallery.owner.name}} - Number phone: {{gallery.owner.numphone}}</h2>
+<hr>
+<h2>Address: {{gallery.address}}</h2>
+<h2>Acreage: {{gallery.acreage}}m<sup>2</sup></h2>
+{% if gallery.img %}
+<img src="{{gallery.img.url}}">
+{% endif %}
+<hr>
+<h1>Events are comming</h1>
+{% for exhibit in exhibits%}
+<div>
+    <a href="../exhibit/{{exhibit.id}}" style="text-decoration: none">
+        <h2>{{exhibit.name}}<h2>
                 {% if exhibit.img %}
-                    <img src="{{exhibit.img.url}}" width="800" height="500">
+                <img src="{{exhibit.img.url}}" width="800" height="500">
                 {% endif %}
                 <h3>From {{exhibit.start_time}} to {{exhibit.end_time}}---{{exhibit.price}}$</h3>
-            </a>
-         </div>
-    <hr>
-    {% endfor %}
-</body>
-</html>
+    </a>
+</div>
+<hr>
+{% endfor %}
+{% endblock %}

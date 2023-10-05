@@ -14,30 +14,10 @@ Home
 {% endblock %}
 
 {% comment %} replace this profile-picture-link by Django variable {% endcomment %}
-{% block profile_picture %}
-https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzCb4DonWw5pT1-A3Su9HzG6TTN4nMOmj7tg&usqp=CAU
-{% endblock %}
 
-{% block my_galleries %}
-{% if request.user.is_owner %}
-<a href="owner">
-    <button class="my-galleries-btn">
-        <i class='bx bxs-bank'></i>
-        My Galleries
-    </button>
-</a>
-{% endif %}
-{% endblock %}
-
-{% block my_arts %}
-{% if request.user.is_artist %}
-<a href="artist">
-    <button class="my-arts-btn">
-        <i class='bx bxs-palette'></i>
-        My Works
-    </button>
-</a>
-{% endif %}
+{% comment %} Update feature notification {% endcomment %}
+{% block number_notification %}
+3
 {% endblock %}
 
 {% block body %}

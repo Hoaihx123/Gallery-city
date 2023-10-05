@@ -8,25 +8,28 @@ from datetime import datetime
 from django.db import connection
 # Create your views here.
 
+
 @user_passes_test(lambda u: u.is_owner == True)
 def manage(request):
     try:
         owner = Owner.objects.get(user=request.user)
         try:
             if request.method == 'POST':
-                id=request.POST['exhibit_id']
+                id = request.POST['exhibit_id']
                 cur = connection.cursor()
                 cur.execute(f"DELETE FROM core_exhibit WHERE id={id}")
                 return redirect('../owner')
             else:
                 glr = Gallery.objects.get(owner=owner)
                 exhibits = Exhibit.objects.filter(gallery=glr)
-                context = {'glr': glr, 'exhibits': exhibits, 'owner_img': owner.img}
+                context = {'glr': glr, 'exhibits': exhibits,
+                           'owner_img': owner.img}
                 return render(request, 'owner/manage.html', context)
         except Gallery.DoesNotExist:
             return redirect('../owner/gallery')
     except Owner.DoesNotExist:
         return redirect('../owner/setting')
+
 
 @user_passes_test(lambda u: u.is_owner == True)
 def create_exhibit(request):
@@ -42,7 +45,8 @@ def create_exhibit(request):
                 num_of_tickets = request.POST['num_of_tickets']
                 price = request.POST['price']
                 img = request.FILES.get('img')
-                new_exhibit = Exhibit.objects.create(gallery=glr, name=name, start_time=start_time, end_time=end_time, type=type, num_of_tickets=num_of_tickets, price=price, img=img)
+                new_exhibit = Exhibit.objects.create(gallery=glr, name=name, start_time=start_time,
+                                                     end_time=end_time, type=type, num_of_tickets=num_of_tickets, price=price, img=img)
                 new_exhibit.save()
                 return redirect('../owner')
             else:
@@ -67,7 +71,8 @@ def setting(request):
             owner.save()
             return redirect('/owner')
         except Owner.DoesNotExist:
-            owner = Owner.objects.create(user=request.user, name=name, address=address, numphone=numphone)
+            owner = Owner.objects.create(
+                user=request.user, name=name, address=address, numphone=numphone)
             owner.save()
             return redirect('/owner/gallery')
     else:
@@ -79,6 +84,7 @@ def setting(request):
             context = ['Name', 'Address', 'Number phone']
             button = 'Next'
         return render(request, 'owner/setting.html', {'context': context, 'button': button})
+
 
 def gallery(request):
     try:
@@ -96,7 +102,8 @@ def gallery(request):
                 return redirect('/owner')
             except Gallery.DoesNotExist:
                 img = request.FILES.get('img')
-                glr = Gallery.objects.create(owner=owner, name=name, acreage=acreage, address=address, img=img)
+                glr = Gallery.objects.create(
+                    owner=owner, name=name, acreage=acreage, address=address, img=img)
                 glr.save()
                 return redirect('/owner')
         else:
@@ -111,4 +118,3 @@ def gallery(request):
             return redirect('/owner/setting')
         else:
             return redirect('/')
-

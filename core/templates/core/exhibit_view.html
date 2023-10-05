@@ -1,18 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{exhibit.name}}</title>
-</head>
-<body>
-    <h2>This is page for view {{exhibit.name}}</h2>
-    {% if exhibit.img %}
-        <img src="{{exhibit.img.url}}" width="1000">
-    {% endif %}
-    <h3>From {{exhibit.start_time}} to {{exhibit.end_time}}</h3>
-    <h3>Type: {{exhibit.type}}</h3>
-    <h3>Price: {{exhibit.price}}$</h3>
-    <h3>Number of tickets: {{exhibit.num_of_tickets}} </h3>
-    <h3>Sold: {{exhibit.quantity_sold}}</h3>
-</body>
-</html>
+{% extends "core/layout.html" %}
+{% load static %}
+
+{% block title %}
+{{gallery.name}}
+{% endblock %}
+
+{% block more_css %}
+{% endblock %}
+
+{% block username %}
+@{{gallery.owner}}
+{% endblock %}
+
+{% block number_notification %}
+5
+{% endblock %}
+
+{% block body %}
+<h2>This is page for view {{exhibit.name}}</h2>
+{% if exhibit.img %}
+<img src="{{exhibit.img.url}}" width="1000">
+{% endif %}
+<h3>From {{exhibit.start_time}} to {{exhibit.end_time}}</h3>
+<h3>Type: {{exhibit.type}}</h3>
+<h3>Price: {{exhibit.price}}$</h3>
+<h3>Number of tickets: {{exhibit.num_of_tickets}} </h3>
+<h3>Sold: {{exhibit.quantity_sold}}</h3>
+{% endblock %}

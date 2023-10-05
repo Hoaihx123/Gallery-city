@@ -65,7 +65,7 @@
             <button class="channel-picture-btn">
 
                 <img class="channel-picture"
-                    src="{% block profile_picture %}https://static.chotot.com/storage/chotot-kinhnghiem/c2c/2019/10/nhim-kieng-an-gi-1.jpg{% endblock %}"
+                    src="{% block profile_picture %}https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzCb4DonWw5pT1-A3Su9HzG6TTN4nMOmj7tg&usqp=CAU{% endblock %}"
                     alt="channel-picture">
                 <ul>
                     <li><a href="">Account</a></li>
@@ -93,9 +93,25 @@
 
 
         {% block my_galleries %}
+        {% if request.user.is_owner %}
+        <a href="{% url 'owner:manage' %}">
+            <button class="my-galleries-btn">
+                <i class='bx bxs-bank'></i>
+                My Galleries
+            </button>
+        </a>
+        {% endif %}
         {% endblock %}
 
         {% block my_arts %}
+        {% if request.user.is_artist %}
+        <a href="{% url 'artist:manage' %}">
+            <button class="my-arts-btn">
+                <i class='bx bxs-palette'></i>
+                My Works
+            </button>
+        </a>
+        {% endif %}
         {% endblock %}
 
         <a href="{% url 'core:signin' %}">

@@ -1,4 +1,11 @@
 {% extends 'artist/base.html' %}
 {% block content %}
-
+    <h1>Event you will attend</h1>
+    {% for data in datas%}
+    <h3>Name: <a href="/exhibit/{{data.6}}">{{data.0}}</a></h3>
+    <h4>From {{data.1}} to {{data.2}} At <a href="/gallery/{{data.7}}">{{data.4}}<a/></h4>
+    <h4>Address: {{data.5}}</h4>
+    <h4>Type: {{data.3}}</h4>   <b></b>
+    <hr>
+    {% endfor %}
 {% endblock %}

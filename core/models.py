@@ -54,7 +54,7 @@ class Gallery(models.Model):
     acreage = models.IntegerField()
     address = models.TextField(max_length=128)
     img = models.ImageField(upload_to='galleries', blank=True)
-
+    description = models.TextField(blank=True)
     def __str__(self):
         return self.name
 
@@ -73,6 +73,13 @@ class Exhibit(models.Model):
     def __str__(self):
         return self.name
 
+class Notification(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    exhibit = models.ForeignKey(Exhibit, on_delete=models.CASCADE, null=True)
+    content = models.TextField()
+    is_invitation = models.BooleanField(default=False)
+    is_seen = models.BooleanField(default=False)
+    date = models.DateField(auto_now_add=True)
 
 class Work(models.Model):
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
@@ -81,8 +88,18 @@ class Work(models.Model):
     data = models.DateField(auto_now_add=True)
     height = models.IntegerField()
     width = models.IntegerField()
-    volume = models.IntegerField(blank=True)
+    volume = models.IntegerField(blank=True, null=True)
     img = models.ImageField(upload_to='works', blank=True)
 
     def __str__(self):
         return self.name
+
+class Place(models.Model):
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    exhibit = models.ForeignKey(Exhibit, on_delete=models.CASCADE)
+
+class Work_Exhibit(models.Model):
+    work = models.ForeignKey(Work, on_delete=models.CASCADE)
+    exhibit = models.ForeignKey(Exhibit, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.work.name+self.exhibit.name

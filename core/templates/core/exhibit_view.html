@@ -26,4 +26,30 @@
 <h3>Price: {{exhibit.price}}$</h3>
 <h3>Number of tickets: {{exhibit.num_of_tickets}} </h3>
 <h3>Sold: {{exhibit.quantity_sold}}</h3>
+<hr>
+{% if places %}
+    <h1>List artists</h1>
+    {% for place in places %}
+        <div>
+            <img src="{{place.artist.img.url}}" width="300">
+            <h2>Name: {{place.artist.name}}</h2>
+            <h2>Address: {{place.artist.address}}</h2>
+            <h2>Birthday: {{place.artist.birthday}}</h2>
+            <h2>Education: {{place.artist.education}}</h2>
+        </div>
+    {% endfor %}
+    <hr>
+    <h1>List works</h1>
+        {% for w_e in w_es %}
+        <div>
+            <img src="{{w_e.work.img.url}}" width="300">
+            <h2>Name:{{w_e.work.name}}</h2>
+            <h2>Execution: {{w_e.work.execution}}</h2>
+            <h2>Size: {{w_e.work.width}}x{{w_e.work.height}}cm<sup>2</sup></h2>
+        </div>
+    {% endfor %}
+{% else %}
+    <h1>No artists have agreed to participate yet</h1>
+{% endif %}
+
 {% endblock %}

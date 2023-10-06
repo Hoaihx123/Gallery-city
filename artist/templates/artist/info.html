@@ -1,0 +1,27 @@
+{% extends 'artist/base.html' %}
+{% block content %}
+
+    {% for notification in notifications%}
+        {% if notification.is_seen %}
+            {% if notification.is_invitation %}
+            <h2 style="color: #7e7779;">Exhibit @{{notification.exhibit.name}} created, will take place on the day {{notification.exhibit.start_time}} and owner want to invite you</h2>
+            {% endif %}
+            <h3 style="color: #7e7779;">{{notification.content}}</h3>
+            {% if notification.is_invitation %}
+            <h4 style="color: #7e7779;">Can you participate? Click on the <a href="register/{{notification.exhibit.id}}">link</a> to register</h4>
+            {% endif %}
+            <h4 style="color: #7e7779;">{{notification.date}}</h4>
+            <hr>
+        {% else %}
+            {% if notification.is_invitation %}
+            <h2>Exhibit @{{notification.exhibit.name}} created, will take place on the day {{notification.exhibit.start_time}} and owner want to invite you</h2>
+            {% endif %}
+            <h3>{{notification.content}}</h3>
+            {% if notification.is_invitation %}
+            <h4>Can you participate? Click on the <a href="register/{{notification.exhibit.id}}">link</a> to register</h4>
+            {% endif %}
+            <h4>{{notification.date}}</h4>
+            <hr>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

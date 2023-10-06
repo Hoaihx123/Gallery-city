@@ -1,0 +1,11 @@
+{% extends 'artist/base.html' %}
+{% block content %}
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label>Choose your works</label><br>
+        {% for work in works %}
+        <input type="checkbox" name="work" value="{{work.id}}">{{work.name}}<br/>
+        {% endfor %}
+        <button type="submit">Accept</button>
+    </form>
+{% endblock %}

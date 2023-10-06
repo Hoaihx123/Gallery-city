@@ -43,10 +43,12 @@ Home
                     <strong>Acreage:</strong> {{gallery.acreage}}m<sup>2</sup>
                 </div>
                 <div class="gallery-description">
-                    <strong>Description:</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia dolor
-                    neque sequi nulla id nemo minus odit, ipsa dicta delectus libero architecto obcaecati a, optio
-                    incidunt velit aut temporibus porro?
-                    {% comment %} TODO: add gallery.description {% endcomment %}
+                    <strong>Description:</strong>
+                        {% if gallery.description %}
+                            {{gallery.description}}
+                        {% else %}
+                            No description yet
+                        {% endif %}
                 </div>
             </div>
         </div>

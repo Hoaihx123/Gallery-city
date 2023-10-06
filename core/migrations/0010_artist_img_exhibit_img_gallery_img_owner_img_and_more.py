@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='artist',
             name='img',
-            field=models.ImageField(blank=True, default='img.png', upload_to='artists'),
+            field=models.ImageField(blank=True, default='default.png', upload_to='artists'),
         ),
         migrations.AddField(
             model_name='exhibit',
@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='owner',
             name='img',
-            field=models.ImageField(blank=True, default='img.png', upload_to='owners'),
+            field=models.ImageField(blank=True, default='default.png', upload_to='owners'),
         ),
         migrations.AddField(
             model_name='work',

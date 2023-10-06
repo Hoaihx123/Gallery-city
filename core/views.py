@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import auth
-from .models import User, Owner, Artist, Gallery, Exhibit
+from .models import User, Owner, Artist, Gallery, Exhibit, Place, Work_Exhibit, Work
 # Create your views here.
 
 
@@ -95,7 +95,10 @@ def logout(request):
 @login_required(login_url='core:signin')
 def exhibit_view(request, exhibit_id):
     exhibit = Exhibit.objects.get(id=exhibit_id)
-    context = {'exhibit': exhibit}
+    places = Place.objects.filter(exhibit=exhibit)
+    w_es = Work_Exhibit.objects.filter(exhibit=exhibit)
+    context = {'exhibit': exhibit, 'places': places, 'w_es': w_es}
+
     return render(request, 'core/exhibit_view.html', context)
 
 

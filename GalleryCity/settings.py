@@ -11,10 +11,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os.path
 from pathlib import Path
+import json
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -76,13 +76,21 @@ WSGI_APPLICATION = 'GalleryCity.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+# C:\Users\1235455\cmpt688\Gallery_city\GalleryCity\infodev.json
+# GalleryCity\infodev.json
+try:
+    with open(os.path.join(BASE_DIR, 'GalleryCity\infodev.json')) as f:
+        info = json.load(f)
+except FileNotFoundError:
+    msg = "Could not find infodev.json file!"
+    print(msg)
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'gallery_city',
+        'NAME': info["database_name"],
         'USER': 'postgres',
-        'PASSWORD': '123456',
+        'PASSWORD': info["database_password"],
         'HOST': 'localhost',
         'PORT': '5432',
         # test github

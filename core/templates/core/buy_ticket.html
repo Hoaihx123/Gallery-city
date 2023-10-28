@@ -1,0 +1,30 @@
+{% extends "core/layout.html" %}
+{% load static %}
+
+{% block title %}
+Buy ticket
+{% endblock %}
+
+{% block username %}
+@{{user.username}}
+{% endblock %}
+
+{% block body %}
+<label>General information</label>
+<h2>Exhibit name: {{exhibit.name}}</h2>
+<h2>Gallery: {{exhibit.gallery.name}} at {{exhibit.gallery.address}} </h2>
+<h2>Owner: {{exhibit.name}}</h2>
+<h2>From {{exhibit.start_time}} to {{exhibit.end_time}}</h2>
+<h2>Price of one ticket: {{exhibit.price}}$</h2>
+<h3>
+{% if num_of_art.0 %}
+    There are currently {{num_of_art.0}} artists confirmed to participate along with {{num_of_work.0}} of their works
+{% else %}
+    Up to now, no artists have confirmed their participation, we are still updating
+{% endif %}
+</h3>
+<form action="" method="POST">
+    {% csrf_token %}
+    <button type="submit">Confirm payment</button>
+</form>
+{% endblock %}

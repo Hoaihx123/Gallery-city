@@ -1,6 +1,7 @@
 {% extends 'owner/base.html' %}
 {% block content %}
     {% for exhibit in exhibits%}
+    <a href="/exhibit/{{exhibit.id}}" style="text-decoration: none" >
         <h3>Name: {{exhibit.name}}</h3>
         <h3>Time takes place: from {{exhibit.start_time}} to {{exhibit.end_time}}</h3>
         <h3>Price: {{exhibit.price}}$     Sold: {{exhibit.quantity_sold}}/{{exhibit.num_of_tickets}} </h3>
@@ -10,6 +11,7 @@
             <button type="submit">Delete</button>
         </form>
         <a href="add_artists/{{exhibit.id}}">Add artists</a>
-        <hr>
+    </a>
+    <hr>
     {% endfor %}
 {% endblock %}

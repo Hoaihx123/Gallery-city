@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import auth
-from .models import User, Owner, Artist, Gallery, Exhibit, Place, Work_Exhibit, Work
+from .models import User, Owner, Artist, Gallery, Exhibit, Place, Work_Exhibit, Work, Cart
+from django.db import connection
+
 # Create your views here.
 
 
@@ -112,9 +114,31 @@ def gallery_view(request, owner_id):
 
 
 @login_required(login_url='core:signin')
-def buy_ticket(request):
-    exhibit_id = request.GET.get('exhibit_id')
+def buy_ticket(request, exhibit_id):
     exhibit = Exhibit.objects.get(id=exhibit_id)
-    exhibit.quantity_sold += 1
-    exhibit.save()
-    return HttpResponse('Buy successfully <a></a>')
+    if request.method == 'POST':
+        new_cart = Cart.objects.create(exhibit=exhibit, user=request.user)
+        new_cart.save()
+        exhibit.quantity_sold += 1
+        exhibit.save()
+        messages.info(request, "successful payment")
+        return redirect('/cart')
+    else:
+        cur = connection.cursor()
+        cur.execute(f'Select count(*) from core_place where exhibit_id={exhibit_id}')
+        num_of_art = cur.fetchone()
+        cur.execute(f'Select count(*) from core_work_exhibit where exhibit_id={exhibit_id}')
+        num_of_work = cur.fetchone()
+        context = {'exhibit': exhibit, 'user': request.user, 'num_of_work': num_of_work, 'num_of_art': num_of_art}
+        return render(request, 'core/buy_ticket.html', context)
+
+@login_required(login_url='core:signin')
+def cart(request):
+    cur = connection.cursor()
+    cur.execute(f"select code, e.name, start_time, end_time, type, price, time from "
+                f"core_cart c join core_exhibit e on c.exhibit_id=e.id and user_id={request.user.id}"
+                " and e.end_time>to_char(now(), 'YYYY-MM-DD')")
+    data = cur.fetchall()
+    data = reversed(data)
+    context = {'user': request.user, 'data': data}
+    return render(request, 'core/cart.html', context)

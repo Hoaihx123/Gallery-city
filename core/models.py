@@ -1,7 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
-
+import qrcode
+from PIL import Image
+from io import BytesIO
+from django.core.files import File
+from datetime import datetime
 # Create your models here.
 
 
@@ -103,3 +106,19 @@ class Work_Exhibit(models.Model):
     exhibit = models.ForeignKey(Exhibit, on_delete=models.CASCADE)
     def __str__(self):
         return self.work.name+self.exhibit.name
+
+class Cart(models.Model):
+    exhibit = models.ForeignKey(Exhibit, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    code = models.ImageField(blank=True, upload_to='QR-code')
+    time = models.TimeField(default=datetime.now)
+    def save(self, *args, **kwargs):
+        qr_img = qrcode.make(self.id)
+        qr_offset = Image.new('RGB', (300, 300), 'white')
+        qr_offset.paste(qr_img)
+        files_name = f'{self.exhibit.name}-{self.user}gr.png'
+        stream = BytesIO()
+        qr_offset.save(stream, 'PNG')
+        self.code.save(files_name, File(stream), save=False)
+        qr_offset.close()
+        super().save(*args, **kwargs)

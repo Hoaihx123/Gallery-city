@@ -1,6 +1,7 @@
 {% extends 'artist/base.html' %}
 {% block content %}
     {% for work in works %}
+    <a href="#" style="text-decoration: none" >
         <h3>Name: {{work.name}}</h3>
         <h3>Execution: {{work.execution}}</h3>
         <h3>Date created: {{work.data}}</h3>
@@ -12,6 +13,7 @@
             <button type="submit">Delete</button>
         </form>
         <a href="work_manage/{{work.id}}">Update</a>
-        <hr>
+    </a>
+    <hr>
     {% endfor %}
 {% endblock %}

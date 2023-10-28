@@ -1,0 +1,37 @@
+{% extends "core/layout.html" %}
+{% load static %}
+
+{% block title %}
+Buy ticket
+{% endblock %}
+
+{% block username %}
+@{{user.username}}
+{% endblock %}
+
+{% block body %}
+			{% if messages is not null %}
+			{% for mes in messages %}
+			<h2>{{mes}}</h2>
+			{% endfor %}
+			{% endif %}
+<h2>Your cart</h2>
+{% for cart in data%}
+***********************************************************<br>
+GALLERY CITY &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; create time {{cart.6}}<br>
+***********************************************************<br>
+--------------------------------------------------------------------------------------------<br>
+Name exhibit's: {{cart.1}}<br>
+Start time: {{cart.2}}<br>
+End time: {{cart.3}}<br>
+Type: {{cart.4}}<br>
+Price: {{cart.5}}$<br>
+--------------------------------------------------------------------------------------------<br>
+<img src="media/{{cart.0}}">
+
+
+<hr>
+{% endfor %}
+</h3>
+
+{% endblock %}

@@ -114,7 +114,7 @@ def register(request, exhibit_id):
             works_id = request.POST.getlist('work')
             if len(works_id):
                 for work_id in works_id:
-                    if Work_Exhibit.objects.filter(exhibit_id=exhibit_id, work_id=work_id).exists()==False:
+                    if Work_Exhibit.objects.filter(exhibit_id=exhibit_id, work_id=work_id).exists() == False:
                         new_we = Work_Exhibit.objects.create(exhibit_id=exhibit_id, work_id=work_id)
                         new_we.save()
                 if Place.objects.filter(artist=artist, exhibit_id=exhibit_id).exists()==False:

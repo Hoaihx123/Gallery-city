@@ -2,3 +2,4 @@ psycopg_binary
 psycopg2
 psycopg
 Pillow
+qrcode

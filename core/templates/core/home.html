@@ -56,14 +56,14 @@ Home
     {% endfor %}
 </div>
 
-{% comment %} {% for exhibit in exhibits %}
+{% for exhibit in exhibits %}
 <div>
     <a href="exhibit/{{exhibit.id}}" style="text-decoration: none">
         <h1>{{exhibit.name}}</h1>
         <img src="/media/{{exhibit.img}}" width="300" height="200">
         <h2>from {{exhibit.start_time}} at {{exhibit.gallery.name}} - address: {{exhibit.gallery.address}}</h2>
-        <b>Price: {{exhibit.price}}$ </b> <a href="buy_ticket?exhibit_id={{exhibit.id}}">Buy now</a>
+        <b>Price: {{exhibit.price}}$ </b> <a href="buy_ticket/{{exhibit.id}}">Buy now</a>
     </a>
 </div>
-{% endfor %} {% endcomment %}
+{% endfor %}
 {% endblock %}

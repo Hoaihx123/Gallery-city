@@ -10,6 +10,7 @@ admin.site.register(models.Exhibit)
 admin.site.register(models.Notification)
 admin.site.register(models.Place)
 admin.site.register(models.Work_Exhibit)
+admin.site.register(models.Cart)
 
 
 

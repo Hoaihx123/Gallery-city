@@ -7,12 +7,13 @@
 <body>
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <input type="text" name="name" placeholder="{{context.0}}"><br>
+        <input type="text" name="name" value="{{context.0}}"><br>
         <br>
-        <input type="file" name="img">
-        <input type="text" name="address" placeholder="{{context.1}}"><br>
+        <input type="file" name="img"><br>
         <br>
-        <input type="text" name="numphone" placeholder="{{context.2}}" ><br>
+        <input type="text" name="address" value="{{context.1}}"><br>
+        <br>
+        <input type="text" name="numphone" value="{{context.2}}" ><br>
         <br>
         <button type="submit">{{button}}</button>
     </form>

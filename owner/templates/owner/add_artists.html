@@ -4,19 +4,50 @@
 <h3>Time takes place: from {{exhibit.start_time}} to {{exhibit.end_time}}</h3>
 <h3>Price: {{exhibit.price}}$     Sold: {{exhibit.quantity_sold}}/{{exhibit.num_of_tickets}} </h3>
 <div id="result">
+    <form>
+        <input type="text" id="search-item" placeholder="Search artists" onkeyup="search()">
+    </form>
+    <script>
+        const search = () => {
+              const searchbox = document.getElementById("search-item").value.toUpperCase()
+              const artists = document.querySelectorAll(".artist")
+              for (var i=0; i<artists.length; i++){
+                let match = artists[i].getElementsByTagName('td')[0];
+                if (match){
+                    let textvalue = match.textContent
+                    if (textvalue.toUpperCase().indexOf(searchbox)>-1){
+                        artists[i].style.display = "";
+                    } else {
+                        artists[i].style.display = "none";
+                    }
+                }
+              }
+        }
+    </script>
     <form action="" method="POST">
         {% csrf_token %}
-        <input type="text" name='content' placeholder="Please leave an invitation for them to attend"><br>
-        {% for artist in artists %}
-        <input type="checkbox" name="artist" value="{{artist.user_id}}">{{artist.name}}<br/>
-        {% endfor %}
-        <button type="submit">Send</button>
-    </form>
+        <table>
+              <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Brith day</th>
+                <th>Education</th>
+                <th><input type="checkbox" name="artist" value="{{artist.user_id}}">All</th>
+              </tr>
+              {% for artist in artists %}
+              <tr class="artist">
+                    <td>{{artist.name}}</td>
+                    <td>{{artist.address}}</td>
+                    <td>{{artist.birthday}}</td>
+                    <td>{{artist.education}}</td>
+                    <td><input type="checkbox" name="artist" value="{{artist.user_id}}"></td>
+              </tr>
+              {% endfor %}
+            </table>
+            <input type="text" name='content' placeholder="Invitation for them to attend"><br>
+            <button type="submit">Send</button>
+     </form>
 
 </select>
 </div>
-<!-- JavaScript -->
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
 {% endblock %}

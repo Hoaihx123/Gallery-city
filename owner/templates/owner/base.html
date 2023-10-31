@@ -4,20 +4,38 @@
     <meta charset="UTF-8">
     <title>Manager</title>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+</style>
 </head>
 <body>
-    <div style="background-color: cadetblue;"><h4><b>GALLERY CITY<b/></h4>
+    <div style="background-color: cadetblue;"><h4><b>GALLERY CITY</b></h4>
     <h3>{{glr.name}}</h3>
     <img src="{{owner_img.url}}" width="100" height="100"><br>
-    <a href="../">Home</a><br>
-    <a href="../logout">Logout</a>
-
-
+    <a href="/">Home</a><br>
+    <a href="/logout">Logout</a>
     </div>
         <div>
 			<div style="width: 22%; height: 750;float: left;text-align: center;padding-top: 6;">
 				<ul style="text-align:left; font-size:25">
                 <a href="/owner"><h2>Management</h2></a><br>
+                <!-- Management quản lý các triển lãm sắp hoặc đang diễn ra-->
+                <a href="/owner/history"><h2>History</h2></a><br>
+                <!-- History xem lịch sử các triển lãm đã diễn ra-->
                 <a href="/owner/create_exhibit"><h2>Create exhibit</h2></a><br>
                 <a href="/owner/info"><h2>Information <sup><b style="color: red;">{{num.0}}</b></sup></h2></a> <br>
                 <a href="/owner/gallery"><h2>Setting</h2></a><br>

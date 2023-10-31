@@ -16,15 +16,16 @@ def manage(request):
         owner = Owner.objects.get(user=request.user)
         try:
             if request.method == 'POST':
-                id = request.POST['exhibit_id']
+                exhibit_id = request.POST['exhibit_id']
                 cur = connection.cursor()
-                cur.execute(f"DELETE FROM core_exhibit WHERE id={id}")
+                cur.execute(f"DELETE FROM core_exhibit WHERE id={exhibit_id}")
                 return redirect('../owner')
             else:
-                glr = Gallery.objects.get(owner=owner)
-                exhibits = Exhibit.objects.filter(gallery=glr)
-                exhibits = reversed(exhibits)
                 cur = connection.cursor()
+                glr = Gallery.objects.get(owner=owner)
+                exhibits = Exhibit.objects.raw(f"select * from core_exhibit where gallery_id={glr.owner_id} "
+                                               "and end_time>to_char(now(), 'YYYY-MM-DD')")
+                exhibits = reversed(exhibits)
                 cur.execute(f"Select count(*) from core_notification WHERE user_id={owner.user_id} and is_seen=False")
                 num = cur.fetchone()
                 context = {'glr': glr, 'exhibits': exhibits,
@@ -54,7 +55,7 @@ def create_exhibit(request):
                                                      end_time=end_time, type=type, num_of_tickets=num_of_tickets, price=price, img=img)
                 new_exhibit.save()
 
-                return redirect('../owner')
+                return redirect(f'../owner/add_artists/{new_exhibit.id}')
             else:
                 cur = connection.cursor()
                 cur.execute(f"Select count(*) from core_notification WHERE user_id={owner.user_id} and is_seen=False")
@@ -77,12 +78,19 @@ def setting(request):
             owner.name = name
             owner.address = address
             owner.numphone = numphone
+            if request.FILES.get('img') != None:
+                img = request.FILES.get('img')
+                owner.img = img
             owner.save()
             return redirect('/owner')
         except Owner.DoesNotExist:
-            img = request.FILES.get('img')
-            owner = Owner.objects.create(
-                user=request.user, name=name, address=address, numphone=numphone, img=img)
+            if request.FILES.get('img')!=None:
+                img = request.FILES.get('img')!=None
+                owner = Owner.objects.create(
+                    user=request.user, name=name, address=address, numphone=numphone, img=img)
+            else:
+                owner = Owner.objects.create(
+                    user=request.user, name=name, address=address, numphone=numphone)
             owner.save()
             return redirect('/owner/gallery')
     else:
@@ -136,31 +144,31 @@ def gallery(request):
 def add_artists(request, exhibit_id):
     try:
         owner = Owner.objects.get(user=request.user)
+        gallery = Gallery.objects.get(owner=owner)
+        exhibit = Exhibit.objects.get(id=exhibit_id, gallery=gallery)
         try:
             if request.method == 'POST':
                 content = request.POST['content']
                 try:
                     id_artists = request.POST.getlist('artist')
-                    exhibit = Exhibit.objects.get(id=exhibit_id)
                     for id_artist in id_artists:
-                        new_nf = Notification.objects.create(user_id=id_artist, content=content, is_invitation=True, exhibit=exhibit)
+                        new_nf = Notification.objects.create(user_id=id_artist, content=content, is_invitation=True,
+                                                             exhibit=exhibit)
                         new_nf.save()
                     return redirect('../')
                 except:
                     return redirect('../')
             else:
-                glr = Gallery.objects.get(owner=owner)
-                exhibit = Exhibit.objects.get(id=exhibit_id)
                 artists = Artist.objects.all()
                 cur = connection.cursor()
                 cur.execute(f"Select count(*) from core_notification WHERE user_id={owner.user_id} and is_seen=False")
                 num = cur.fetchone()
-                context = {'owner_img': owner.img, 'glr': glr, 'exhibit': exhibit, 'artists': artists, 'num': num}
+                context = {'owner_img': owner.img, 'glr': gallery, 'exhibit': exhibit, 'artists': artists, 'num': num}
                 return render(request, 'owner/add_artists.html', context)
         except Gallery.DoesNotExist:
             return redirect('owner/gallery')
-    except Owner.DoesNotExist:
-        return redirect('owner/setting')
+    except :
+        return redirect('/owner/')
 
 def info(request):
     try:
@@ -177,4 +185,47 @@ def info(request):
             return redirect('../owner/gallery')
     except Owner.DoesNotExist:
         return redirect('../owner/setting')
+
+def history(request):
+    try:
+        owner = Owner.objects.get(user=request.user)
+        try:
+            if request.method == 'POST':
+                exhibit_id = request.POST['exhibit_id']
+                cur = connection.cursor()
+                cur.execute(f"DELETE FROM core_exhibit WHERE id={exhibit_id}")
+                return redirect('../owner')
+            else:
+                glr = Gallery.objects.get(owner=owner)
+                cur = connection.cursor()
+                cur.execute(f"Select count(*) from core_notification WHERE user_id={owner.user_id} and is_seen=False")
+                num = cur.fetchone()
+                cur.execute(f"select * from core_exhibit where gallery_id={glr.owner_id} "
+                            "and end_time<to_char(now(), 'YYYY-MM-DD') order by end_time DESC")
+                exhibits = cur.fetchall()
+                context = {'owner_img': owner.img, 'num': num, 'glr': glr, 'exhibits': exhibits}
+                return render(request, 'owner/history.html', context)
+        except Gallery.DoesNotExist:
+            return redirect('../owner/gallery')
+    except Owner.DoesNotExist:
+        return redirect('../owner/setting')
+#
+# def history_search(request):
+#     try:
+#         owner = Owner.objects.get(user=request.user)
+#         glr = Gallery.objects.get(owner=owner)
+#         cur = connection.cursor()
+#         cur.execute(f"Select count(*) from core_notification WHERE user_id={owner.user_id} and is_seen=False")
+#         num = cur.fetchone()
+#         q = request.GET.get('q')
+#         q = '%'+q+'%'
+#         sql = "select * from core_exhibit where gallery_id="+str(glr.owner_id)
+#         sql = sql + " and end_time<to_char(now(), 'YYYY-MM-DD') AND lower(name) like %(name)s order by end_time DESC"
+#         cur.execute(sql, {'name': q})
+#         exhibits = cur.fetchall()
+#         context = {'owner_img': owner.img, 'num': num, 'glr': glr, 'exhibits': exhibits}
+#         return render(request, 'owner/history.html', context)
+#     except:
+#         return redirect('../owner/gallery')
+
 

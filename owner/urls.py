@@ -8,5 +8,7 @@ urlpatterns = [
     path('gallery', views.gallery, name='gallery'),
     path('create_exhibit', views.create_exhibit, name='create_exhibit'),
     path('add_artists/<str:exhibit_id>', views.add_artists, name='add_artists'),
-    path('info', views.info, name='info')
+    path('info', views.info, name='info'),
+    path('history', views.history, name='history'),
+
 ]

@@ -70,7 +70,7 @@
                 <ul>
                     <li><a href="">Account</a></li>
                     <li><a href="">History</a></li>
-                    <li><a href="{% url "core:signin" %}">Log out</a></li>
+                    <li><a href="/logout">Log out</a></li>
                 </ul>
             </button>
         </div>
@@ -84,7 +84,7 @@
             </button>
         </a>
 
-        <a href="cart">
+        <a href="/cart">
             <button class="cart-btn">
                 <i class='bx bxs-cart'></i>
                 Cart
@@ -114,7 +114,7 @@
         {% endif %}
         {% endblock %}
 
-        <a href="{% url 'core:signin' %}">
+        <a href="/logout">
             <button class="log-out-btn">
                 <i class='bx bxs-log-out'></i>
                 Log Out

@@ -133,7 +133,7 @@ def register(request, exhibit_id):
             context = {'artist': artist, 'works': works, 'num': num}
             return render(request, 'artist/register.html', context)
     except:
-        return redirect('../artist/setting')
+        return redirect('../setting')
 
 @user_passes_test(lambda u: u.is_artist == True)
 def info(request):

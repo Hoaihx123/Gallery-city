@@ -1,0 +1,89 @@
+{% extends 'owner/base.html' %}
+{% block content %}
+    <form>
+        <input type="text" id="search-item" placeholder="Search history" onkeyup="search()">
+        <input type="month" id="time" name="time" min="2020-08" value="<?php echo date('Y-m');?>" onchange="filter()" >
+    </form>
+    <script>
+        const search = () => {
+              const searchbox = document.getElementById("search-item").value.toUpperCase()
+              const exhibits = document.querySelectorAll(".exhibit")
+              for (var i=0; i<exhibits.length; i++){
+                let match = exhibits[i].getElementsByTagName('td')[0];
+                if (match){
+                    let textvalue = match.textContent
+                    if (textvalue.toUpperCase().indexOf(searchbox)>-1){
+                        exhibits[i].style.display = "";
+                    } else {
+                        exhibits[i].style.display = "none";
+                    }
+                }
+              }
+        }
+        const filter = () => {
+            const time = document.getElementById("time").value
+            const exhibits = document.querySelectorAll(".exhibit")
+            for (var i=0; i<exhibits.length; i++){
+                let match = exhibits[i].getElementsByTagName('td')[1];
+                if (match){
+                    let textvalue = match.textContent
+                    if (textvalue.substring(0,7)==time){
+                        exhibits[i].style.display = "";
+                    } else {
+                        exhibits[i].style.display = "none";
+                    }
+                }
+            }
+
+        }
+    </script>
+    <table>
+              <tr>
+                  <th>Name</th>
+                  <th>Start timer</th>
+                  <th>End time</th>
+                  <th>Type</th>
+                  <th>Price($)</th>
+                  <th>Sold</th>
+                  <th>Profit($)</th>
+                  <th></th>
+              </tr>
+              {% for exhibit in exhibits %}
+
+              <tr href="/exhibit/{{exhibit.0}}" class="exhibit">
+                  <a  style="text-decoration: none" >
+                    <td>{{exhibit.1}}</td>
+                    <td>{{exhibit.2}}</td>
+                    <td>{{exhibit.3}}</td>
+                    <td>{{exhibit.4}}</td>
+                    <td>{{exhibit.7}}</td>
+                    <td>{{exhibit.6}}</td>
+                    <td>{% widthratio exhibit.7 1 exhibit.6 %}</td>
+                    <td>
+                        <form action="", method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="exhibit_id" value="{{exhibit.0}}">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                  </a>
+              </tr>
+
+              {% endfor %}
+            </table>
+<!--    {% for exhibit in exhibits%}-->
+<!--    <a href="/exhibit/{{exhibit.0}}" style="text-decoration: none" >-->
+<!--        <h3>Name: {{exhibit.1}}</h3>-->
+<!--        <h3>Time takes place: from {{exhibit.2}} to {{exhibit.3}}</h3>-->
+<!--        <h3>Price: {{exhibit.7}}$     Sold: {{exhibit.6}}/{{exhibit.5}} </h3>-->
+<!--        <h3>Profit: {% widthratio exhibit.7 1 exhibit.6 %}$</h3>-->
+<!--        <img src="/media/{{exhibit.9}}" width="200">-->
+<!--        <form action="", method="POST">-->
+<!--            {% csrf_token %}-->
+<!--            <input type="hidden" name="exhibit_id" value="{{exhibit.id}}">-->
+<!--            <button type="submit">Delete history</button>-->
+<!--        </form>-->
+<!--    </a>-->
+<!--    <hr>-->
+<!--    {% endfor %}-->
+{% endblock %}

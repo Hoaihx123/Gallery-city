@@ -33,6 +33,18 @@ ALTER TABLE IF EXISTS "core_notification"
     ADD CONSTRAINT noti1 FOREIGN KEY ("exhibit_id")
     REFERENCES "core_exhibit" (id) MATCH SIMPLE
     ON UPDATE CASCADE
-    ON DELETE CASCADE;name, start_time, end_time, type
+    ON DELETE CASCADE;
+
+ALTER TABLE IF EXISTS "core_cart" 
+    ADD CONSTRAINT cart1 FOREIGN KEY ("exhibit_id") 
+    REFERENCES "core_exhibit" (id) MATCH SIMPLE 
+    ON UPDATE CASCADE 
+    ON DELETE CASCADE;
+    
+ALTER TABLE IF EXISTS "core_cart" 
+    ADD CONSTRAINT cart2 FOREIGN KEY ("user_id") 
+    REFERENCES "core_user" (id) MATCH SIMPLE 
+    ON UPDATE CASCADE 
+    ON DELETE CASCADE;
 
 
